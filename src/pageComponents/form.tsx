@@ -28,26 +28,29 @@ export function FormCard() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const[ selectedNumberName, setSelectedNumberName] = useState();
+  const[ selectedNumberpeator, setSelectedNumberOperator] = useState();
 
 
   useEffect(() => {
     setDst([
-      "2347051707101",
-      "2349081083292",
-      "2348179654429",
-      "2347082815000",
-      "2347086813565",
-      "2348079258587",
-      "2347044782549",
-      "2349067074483",
-      "2347065742398",
-      "2348032008658",
-      "2349022121975",
-      "2348036881732",
-      "2349070754180"
-    ]);
-    setSrc(['IBTCPension']); // Corrected: Assign DST to src
+      { number: "2347051707101", name: "Henry", lineOperator: "Glo" },
+      { number: "2349081083292", name: "Hakeem's ", lineOperator: "9mobile" },
+      { number: "2348179654429", name: "Pelumi's ", lineOperator: "9mobile" },
+      { number: "2347082815000", name: "Emmanuel's ", lineOperator: "Airtel" },
+      { number: "2347086813565", name: "Michael's ", lineOperator: "Airtel" },
+      { number: "2348079258587", name: "Michael's", lineOperator: "Glo" },
+      { number: "2347044782549", name: "Michael's ", lineOperator: "MTN" },
+      { number: "2349067074483", name: "Mr. Emmanuel's ", lineOperator: "MTN" },
+      { number: "2347065742398", name: "Abdullahi's ", lineOperator: "MTN" },
+      { number: "2348032008658", name: "Mr Adekunle's ", lineOperator: "MTN" },
+      { number: "2349022121975", name: "Mr Adekunle's ", lineOperator: "Airtel" },
+      { number: "2348036881732", name: "Oluwatobi's ", lineOperator: "MTN" },
+      { number: "2349070754180", name: "Oluwatobi's ", lineOperator: "Airtel" }
+  ]);// Corrected: Assign DST to src
   }, []); 
+
+
 
   return (
     <Card className="w-[350px]">
@@ -59,35 +62,37 @@ export function FormCard() {
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="username">username</Label>
-              <Input id="username" placeholder="usersName" />
+              <Input id="username" placeholder="usersname" />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="password">password</Label>
               <Input id="password" placeholder="password" />
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="Src">Src</Label>
-              <Select>
-                <SelectTrigger id="Src">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent position="popper">
-                {src.map((number, index) => (
-          <SelectItem  key={index} value={number}>{number}</SelectItem>
-        ))}
-        
-                </SelectContent>
-              </Select>
+              <Label htmlFor="password">Src</Label>
+              <Input id="password" placeholder="Src" />
             </div>
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="phoneNumber">phoneNumber</Label>
+            
+              
+              
               <Select>
                 <SelectTrigger id="phoneNumber">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
                 <SelectContent position="popper">
                 {DST.map((number, index) => (
-          <SelectItem  key={index} value={number}>{number}</SelectItem>
+          <SelectItem  key={index} value={number.number} onChange={(e) => {
+            setSelectedNumberName(number.name);
+            setSelectedNumberOperator(number.lineOperator);
+            console.log(`Selected Number: ${number.number}, Name: ${number.name}, Operator: ${number.lineOperator}`);
+          }}>
+          <Label htmlFor={number.number}>{number.number}</Label>/
+          <Label  htmlFor={number.name}>{number.name}</Label>/
+          <Label  htmlFor={number.lineOperator}>{number.lineOperator}</Label>
+          </SelectItem>
+
+          
         ))}
         
                 </SelectContent>
